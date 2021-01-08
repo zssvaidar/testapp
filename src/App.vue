@@ -2,11 +2,15 @@
   <div id="app">
     {{$store.state.posts}}
     <Main v-bind:posts="$store.state.posts" />
+    {{$cookies.get('ids')}} 
+
+    {{$store.state.idcount}}
   </div>
 </template>
 
 <script>
 
+import Vue from 'vue'
 import Main from './components/main.vue'
 export default {
   name: 'App',
@@ -20,6 +24,19 @@ export default {
   mounted() {
     this.$store.state.posts = [{id:0, title: "nice", body:'is so good'}]
     setTimeout(this.countdown, 1000);
+    
+    if(Vue.$cookies.get('ids'))
+    {
+      var ids = Vue.$cookies.get('ids');
+      ids.push(ids[ids.length - 1] + 1)
+      Vue.$cookies.set('ids', ids );
+    }
+    else
+      Vue.$cookies.set('ids', [0,] );
+
+    // this.$store.state.idcount+=1;
+
+    
   },
   methods: {
     countdown() {

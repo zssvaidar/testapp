@@ -5,7 +5,8 @@ import Vue from 'vue'
 Vue.use(Vuex);
 
 const state = {
-    posts: []
+    posts: [],
+    idcount: 0
 }
 
 const getters = {}
